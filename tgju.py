@@ -133,6 +133,7 @@ class Gold_Rates:
     
 # if its a int it assumes that it's gold karrots if letter than currency
 def get_rate(arg): #type: ignore
+    """if the parameter is a int you'll get gold prices if letters than currency"""
     if type(arg) == int: #type: ignore
         return Gold_Rates(arg)
     else:
