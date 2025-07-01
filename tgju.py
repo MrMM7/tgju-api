@@ -141,10 +141,11 @@ class Gold_Rates:
 def get_gold_rate(karrot: int):
     """Gives the of the selected gold price see the rial price with .rial() and toman price with .toman()"""
     """only type the karrot not the starting \'geram\' """
+
     return Gold_Rates(karrot)
-    
+
 def test():
-    # print(get_currency_rate('USD').rial())
+    print(get_currency_rate('USD').rial())
     print(get_gold_rate(18).rial())
 
 if __name__ == "__main__":
