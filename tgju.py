@@ -130,22 +130,16 @@ class Gold_Rates:
     def rial(self):
         # returns the rate in rial
         return self.rate    
-
-
-def get_currency_rate(currency: str):
-    """Gives the price of the selected currency see the rial price with .rial() and toman price with .toman()"""
-    return Currency_Rates(currency)
-
-def get_gold_rate(karrot: int):
-    """Gives the of the selected gold price see the rial price with .rial() and toman price with .toman()"""
-    """only type the karrot not the starting \'geram\' """
-
-    return Gold_Rates(karrot)
-
-
+    
+# if its a int it assumes that it's gold karrots if letter than currency
+def get_rate(arg): #type: ignore
+    if type(arg) == int: #type: ignore
+        return Gold_Rates(arg)
+    else:
+        return Currency_Rates(arg) #type: ignore
+    
 def test():
-    print(get_currency_rate('USD').rial())
-    print(get_gold_rate(18).rial())
+    print(get_rate('USD').toman())
 
 if __name__ == "__main__":
     test()
