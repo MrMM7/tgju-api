@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from math import floor
+from typing import Union
 
 __author__ = "MrMM7"
 
@@ -102,8 +103,6 @@ class Currency_Rates:
     def rial(self):
         # returns the rate in rial
         return self.currency
-    
-
 
 class Gold_Rates:
     def __init__(self, gold: int):
@@ -132,15 +131,21 @@ class Gold_Rates:
         return self.rate    
     
 # if its a int it assumes that it's gold karrots if letter than currency
-def get_rate(arg): #type: ignore
+def get_rate(arg: Union[int, str]):
     """if the parameter is a int you'll get gold prices if letters than currency"""
-    if type(arg) == int: #type: ignore
+    if type(arg) == int: 
         return Gold_Rates(arg)
+    elif type(arg) == str:
+        return Currency_Rates(arg)
     else:
-        return Currency_Rates(arg) #type: ignore
+        print('get_rate only accepts ints and strings please only enter one of those')
     
 def test():
-    print(get_rate('USD').toman())
+    usd_rate = get_rate('USD')
+    gold_rate = get_rate(18)
+
+    print(f'USD: {usd_rate.toman():,}') 
+    print(f'Gold: {gold_rate.toman():,}') 
 
 if __name__ == "__main__":
     test()
