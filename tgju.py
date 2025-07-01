@@ -55,6 +55,7 @@ def every_currencies():
 def every_mineral():
     return all_gold
 
+# these are soo frekin awesome I have my own errors!s
 class InvalidCurrency(Exception):
     def __init__(self, message: str):
         print(message)
@@ -63,6 +64,7 @@ class InvalidMineral(Exception):
     def __init__(self, message: str):
         print(message)
 
+# returns the currency rate of the requested currency by the user
 class Currency_Rates:
     def __init__(self, currency: str):
         if len(currency) > 3: # if its longer than 3 letters like Dollar or Pound it instantly returns
@@ -104,6 +106,7 @@ class Currency_Rates:
         # returns the rate in rial
         return self.currency
 
+# returns the live price of Gold in both 18k or 24k its up to the users choice
 class Gold_Rates:
     def __init__(self, gold: int):
         if gold != 18 and gold != 24: # if its not 18 or 24 it returns
@@ -142,7 +145,8 @@ def get_rate(arg: Union[int, str]):
             raise ValueError('get_rate only accepts ints and strings')
     except ValueError as e:
         print(e)
-    
+     
+# just testing the functionality of the code
 def test():
     usd_rate = get_rate('USD')
     gold_rate = get_rate(18)
