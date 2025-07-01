@@ -66,7 +66,7 @@ class InvalidMineral(Exception):
 class Currency_Rates:
     def __init__(self, currency: str):
         if len(currency) > 3: # if its longer than 3 letters like Dollar or Pound it instantly returns
-            raise InvalidCurrency("Please only enter the first 3 letters (e.g USD, GBP, etc)")
+            raise InvalidCurrency('Please only enter the first 3 letters (e.g USD, GBP, etc)')
         
         currency_exists = False
         for list_currency in all_currencies :
@@ -107,7 +107,7 @@ class Currency_Rates:
 class Gold_Rates:
     def __init__(self, gold: int):
         if gold != 18 and gold != 24: # if its not 18 or 24 it returns
-            raise InvalidCurrency("Please only enter the karrot like 18 and 24")
+            raise InvalidCurrency('Please only enter the karrot like 18 and 24')
         
         site_url = f'https://www.tgju.org/profile/geram{gold}'
         try:
@@ -133,12 +133,15 @@ class Gold_Rates:
 # if its a int it assumes that it's gold karrots if letter than currency
 def get_rate(arg: Union[int, str]):
     """if the parameter is a int you'll get gold prices if letters than currency"""
-    if type(arg) == int: 
-        return Gold_Rates(arg)
-    elif type(arg) == str:
-        return Currency_Rates(arg)
-    else:
-        print('get_rate only accepts ints and strings please only enter one of those')
+    try:
+        if isinstance(arg, int): 
+            return Gold_Rates(arg)
+        elif isinstance(arg, str):
+            return Currency_Rates(arg)
+        else:
+            raise ValueError('get_rate only accepts ints and strings')
+    except ValueError as e:
+        print(e)
     
 def test():
     usd_rate = get_rate('USD')
