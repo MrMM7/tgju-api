@@ -4,7 +4,7 @@ from math import floor
 
 __author__ = "MrMM7"
 
-all_currencys = [
+all_currencies  = [
   "USD",
   "EUR",
   "AED",
@@ -48,8 +48,8 @@ all_gold: list[int] = [
     24
 ]
 
-def every_currencys():
-    return all_currencys
+def every_currencies():
+    return all_currencies 
 
 def every_mineral():
     return all_gold
@@ -68,7 +68,7 @@ class Currency_Rates:
             raise InvalidCurrency("Please only enter the first 3 letters (e.g USD, GBP, etc)")
         
         currency_exists = False
-        for list_currency in all_currencys:
+        for list_currency in all_currencies :
             if list_currency.lower() == currency.lower():
                 currency_exists = True
 
@@ -103,29 +103,23 @@ class Currency_Rates:
         # returns the rate in rial
         return self.currency
     
-def get_currency_rate(currency: str):
-    """Gives the price of the selected currency see the rial price with .rial() and toman price with .toman()"""
-    return Currency_Rates(currency)
 
 
 class Gold_Rates:
     def __init__(self, gold: int):
         if gold != 18 and gold != 24: # if its not 18 or 24 it returns
             raise InvalidCurrency("Please only enter the karrot like 18 and 24")
-
-        site_url = f'https://www.tgju.org/profile/geram{gold}'
         
+        site_url = f'https://www.tgju.org/profile/geram{gold}'
         try:
             response = requests.get(site_url)
             response.raise_for_status()
-
             html = response.text
 
             soup = BeautifulSoup(html, 'html.parser')
             price = soup.find('span', {'data-col': 'info.last_trade.PDrCotVal'})
 
             self.rate: int = int(price.text.replace(',', '')) #type: ignore
-
         except requests.exceptions.HTTPError:
             print('we hit a network error try again')
     
@@ -138,11 +132,16 @@ class Gold_Rates:
         return self.rate    
 
 
+def get_currency_rate(currency: str):
+    """Gives the price of the selected currency see the rial price with .rial() and toman price with .toman()"""
+    return Currency_Rates(currency)
+
 def get_gold_rate(karrot: int):
     """Gives the of the selected gold price see the rial price with .rial() and toman price with .toman()"""
     """only type the karrot not the starting \'geram\' """
 
     return Gold_Rates(karrot)
+
 
 def test():
     print(get_currency_rate('USD').rial())
