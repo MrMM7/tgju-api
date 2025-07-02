@@ -68,15 +68,15 @@ def every_mineral():
 # these are soo frekin awesome I have my own errors!
 class InvalidCurrency(Exception):
     def __init__(self, message: str):
-        print(message)
+        super().__init__(message)
 
 class InvalidMineral(Exception):
     def __init__(self, message: str):
-        print(message)
+        super().__init__(message)
 
 class InvalidCrypto(Exception):
     def __init__(self, message: str):
-        print(message)
+        super().__init__(message)
 
 # returns the currency rate of the requested currency by the user
 class Currency_Rates:
