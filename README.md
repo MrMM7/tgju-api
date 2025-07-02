@@ -21,7 +21,7 @@ This Python package scrapes real-time currency exchange rates and gold prices fr
 2.  Install required packages:
 
     ```
-    pip install requests beautifulsoup4
+    pip install requests beautifulsoup4 pycoingecko
     ```
 
 ## Supported Currencies and Gold Types
@@ -67,6 +67,19 @@ print(f"18k Gold per gram (Rials): {gold_18k.rial():,}")
 print(f"18k Gold per gram (Tomans): {gold_18k.toman():,}")
 ```
 
+### Getting Crypto Rates
+
+```
+# Get BTC rate
+btc_rate = get_rate('$bitcoin')
+# MUST write .dollar() or alternatively use the automatic conversion to IRR using .rial() or .toman()
+print(f"BTC in Dollars: {btc_rate.dollar():,}")
+print(f"BTC in Rials: {btc_rate.rial():,}")
+print(f"BTC in Tomans: {btc_rate.toman():,}")
+```
+
+Note: crypto names that are longer than one word like baby doge coin don't work please only use single word ones like bitcoin, ethereum, ... etc
+
 ## Why You MUST Choose `.rial()` or `.toman()`
 
 In the Iranian currency system:
@@ -79,6 +92,7 @@ In the Iranian currency system:
 
 - `.rial()` returns the raw value in Iranian Rials
 - `.toman()` converts the value to Tomans (dividing Rials by 10)
+- `.dollar()` only works on Crypto but returns the current live USD price of it
 
 You **must explicitly choose** between these methods because:
 
@@ -94,12 +108,17 @@ The package raises custom exceptions for invalid inputs:
 ```
 try:
     # Attempt to get invalid currency
-    get_currency_rate('XYZ')
+    get_rate('XYZ')
 except InvalidCurrency as e:
     print(e)
 try:
     # Attempt to get invalid gold karat
-    get_gold_rate(22)
+    get_rate(22)
+except InvalidMineral as e:
+    print(e)
+try:
+    # Attempt to get invalid crypto
+    get_rate('$gooncoin')
 except InvalidMineral as e:
     print(e)
 ```
