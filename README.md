@@ -119,7 +119,7 @@ except InvalidMineral as e:
 try:
     # Attempt to get invalid crypto
     get_rate('$gooncoin')
-except InvalidMineral as e:
+except InvalidCrypto as e:
     print(e)
 ```
 
