@@ -1,11 +1,12 @@
 # TGJU API For Python
 
-This Python package scrapes real-time currency exchange rates and gold prices from [tgju.org](https://www.tgju.org) for the Iranian market. It provides both Rial and Toman values for all supported currencies and gold types.
+This Python package scrapes real-time currency exchange rates and gold prices from [tgju.org](https://www.tgju.org) for the Iranian market. It provides both Rial and Toman values for all supported currencies , gold types and Cryptocurrencies.
 
 ## Features
 
 - Get current exchange rates for 36+ currencies
 - Get current gold prices for 18k and 24k gold
+- Get the current price of the latest crypto in both USD and IRR
 - Automatic value conversion between Rial and Toman
 - Comprehensive error handling
 - Simple and intuitive API
@@ -39,6 +40,14 @@ HKD, RUB, AZN, AMD, GEL, KGS, TJS, TMT
 - 18k
 - 24k
 
+### Crypto
+
+because of the weird naming standards tgju uses you can't just write $BTC it has to be the full name WITH a $ sign behind it
+
+- $bitcoin
+- $ethereum
+- ... etc
+  
 ## Usage
 
 ### Importing the Module
@@ -78,7 +87,7 @@ print(f"BTC in Rials: {btc_rate.rial():,}")
 print(f"BTC in Tomans: {btc_rate.toman():,}")
 ```
 
-Note: crypto names that are longer than one word like baby doge coin don't work please only use single word ones like bitcoin, ethereum, ... etc
+Note: crypto names that are longer than one word like "baby doge coin" don't work please only use single word ones like bitcoin, ethereum, ... etc
 
 ## Why You MUST Choose `.rial()` or `.toman()`
 
@@ -126,10 +135,10 @@ except InvalidCrypto as e:
 ## Example Output
 
 ```
-USD in Rials: 500,530
-USD in Tomans: 50,053
-18k Gold per gram (Rials): 2,483,500
-18k Gold per gram (Tomans): 248,350
+USD in Rials: 900,000
+USD in Tomans: 90,000
+18k Gold per gram (Rials): 70,000,000
+18k Gold per gram (Tomans): 7,000,000
 ```
 
 ## Contributing
@@ -142,4 +151,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Disclaimer
 
-This package scrapes data from tgju.org. Use at your own risk. I The developers am not responsible for any financial decisions made using this data. Always verify rates with official sources before making transactions.
+This package scrapes data from [tgju.org](https://tgju.org). Use it at your own risk. I The developer am not responsible for any financial decisions made based on this data. Always verify rates with official sources before making any transactions.
+
+Please use this tool responsibly. Excessive requests or abuse may result in tgju.org generously gifting you with an **IP ban**.
+
