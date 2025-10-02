@@ -24,27 +24,10 @@ This Python package scrapes real-time currency exchange rates and gold prices fr
     pip install requests beautifulsoup4
     ```
 
-## Supported Currencies and Gold Types
+## Supported Currencies, Gold Types, Cryptos and Energy
 
-### Currencies
+Anything that can be found on [tgju.org](https://tgju.org) is supported.
 
-```
-USD, EUR, AED, GBP, TRY, CHF, CNY, JPY, KRW, CAD, AUD, NZD, SGD, INR,
-PKR, IQD, SYP, AFN, DKK, SEK, NOK, SAR, QAR, OMR, KWD, BHD, MYR, THB,
-HKD, RUB, AZN, AMD, GEL, KGS, TJS, TMT
-```
-
-### Gold Karats
-
-- 18k
-- 24k
-
-### Crypto
-
-- BTC
-- ETH
-- Every coin that is available on [tgju.org](https://tgju.org).
-  
 ## Usage
 
 ### Importing the Module
