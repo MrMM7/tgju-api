@@ -6,8 +6,7 @@ This Python package scrapes real-time currency exchange rates and gold prices fr
 
 - Get current exchange rates for 36+ currencies
 - Get current gold prices for 18k and 24k gold
-- Get the current price of the latest crypto in both USD and IRR
-- Automatic value conversion between Rial and Toman
+- Get the current price of the latest crypto in USD
 - Comprehensive error handling
 - Simple and intuitive API
 
@@ -22,7 +21,7 @@ This Python package scrapes real-time currency exchange rates and gold prices fr
 2.  Install required packages:
 
     ```
-    pip install requests beautifulsoup4 pycoingecko
+    pip install requests beautifulsoup4
     ```
 
 ## Supported Currencies and Gold Types
@@ -42,11 +41,9 @@ HKD, RUB, AZN, AMD, GEL, KGS, TJS, TMT
 
 ### Crypto
 
-because of the weird naming standards tgju uses you can't just write $BTC it has to be the full name WITH a $ sign behind it
-
-- $bitcoin
-- $ethereum
-- ... etc
+- BTC
+- ETH
+- Every coin that is available on [tgju.org](https://tgju.org).
   
 ## Usage
 
@@ -56,89 +53,22 @@ because of the weird naming standards tgju uses you can't just write $BTC it has
 from tgju import get_rate
 ```
 
-### Getting Currency Rates
-
-```
-# Get USD rate
-usd_rate = get_rate('USD')
-# MUST choose either .rial() or .toman()
-print(f"USD in Rials: {usd_rate.rial():,}")
-print(f"USD in Tomans: {usd_rate.toman():,}")
+### Getting Rates
+```python
+# simply put the URL suffix example: https://www.tgju.org/profile/ geram18 <--
+gold = get_rate('geram18')
+print(f"Gold rate in rial: {gold}")
 ```
 
-### Getting Gold Rates
-
-```
-# Get 18k gold rate
-gold_18k = get_rate(18)
-# MUST choose either .rial() or .toman()
-print(f"18k Gold per gram (Rials): {gold_18k.rial():,}")
-print(f"18k Gold per gram (Tomans): {gold_18k.toman():,}")
-```
-
-### Getting Crypto Rates
-
-```
-# Get BTC rate
-btc_rate = get_rate('$bitcoin')
-# MUST write .dollar() or alternatively use the automatic conversion to IRR using .rial() or .toman()
-print(f"BTC in Dollars: {btc_rate.dollar():,}")
-print(f"BTC in Rials: {btc_rate.rial():,}")
-print(f"BTC in Tomans: {btc_rate.toman():,}")
-```
-
-Note: crypto names that are longer than one word like "baby doge coin" don't work please only use single word ones like bitcoin, ethereum, ... etc
-
-## Why You MUST Choose `.rial()` or `.toman()`
-
-In the Iranian currency system:
-
-- **Rial (﷼)** is the official currency
-- **Toman (تومان)** is an unofficial but widely used unit where:
-
-  1 Toman = 10 Rials
-  The conversion methods:
-
-- `.rial()` returns the raw value in Iranian Rials
-- `.toman()` converts the value to Tomans (dividing Rials by 10)
-- `.dollar()` only works on Crypto but returns the current live USD price of it
-
-You **must explicitly choose** between these methods because:
-
-1.  Financial calculations require clear unit specification
-2.  Automatic conversion could lead to dangerous financial errors
-3.  Different use cases require different units (official vs common usage)
-4.  Prevents ambiguity in financial reporting
-
-## Error Handling
-
-The package raises custom exceptions for invalid inputs:
-
-```
-try:
-    # Attempt to get invalid currency
-    get_rate('XYZ')
-except InvalidCurrency as e:
-    print(e)
-try:
-    # Attempt to get invalid gold karat
-    get_rate(22)
-except InvalidMineral as e:
-    print(e)
-try:
-    # Attempt to get invalid crypto
-    get_rate('$gooncoin')
-except InvalidCrypto as e:
-    print(e)
-```
+## Returns
+by default every number returned by the ```get_rate()``` function is in rial <em>however</em> for crypto 
+it is in USD because that's the way they are represented on the site.
 
 ## Example Output
 
 ```
-USD in Rials: 900,000
-USD in Tomans: 90,000
-18k Gold per gram (Rials): 70,000,000
-18k Gold per gram (Tomans): 7,000,000
+USD in Rials: 1,178,600.0
+18k Gold per gram (Rials): 111,536,000.0
 ```
 
 ## Contributing
