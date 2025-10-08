@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from typing import Union
 
-# returns the live price of Gold in both 18k or 24k its up to the users choice
+# returns the live rate of whatever currency requested
 def rates(link_suffix: str):
 
     class Rates:
@@ -22,19 +22,21 @@ def rates(link_suffix: str):
             except requests.exceptions.RequestException as e:
                 print(e)
 
-        def current_rate(self) -> float:
+        def get_current_rate(self) -> float:
             return self.rate
 
-    return Rates(link_suffix).current_rate()
+    return Rates(link_suffix).get_current_rate()
 
 
-# if it's an int it assumes that it's gold carrots if letter than currency
-def get_rate(arg: Union[int, str]):
+# the main function used to get rates
+def get_rate(arg: str):
+    """Returns the current available rate of the currency requested on the tgju.org website"""
+  
     try:
-        if isinstance(arg, (int, str)):
+        if isinstance(arg, str):
             return rates(arg)
         else:
-            raise ValueError('get_rate only accepts ints and strings')
+            raise ValueError('get_rate only accepts strings')
 
     except ValueError as e:
         print(e)
